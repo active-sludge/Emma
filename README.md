@@ -25,6 +25,10 @@ Emma's requirement analysis and design documents and other information can be fo
 ## External Library
 
 - Google API Client
+- WebTest
+- pyopenssl
+- httplib2
+- uritemplate
 
 
 ## Contact
