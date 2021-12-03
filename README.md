@@ -22,7 +22,7 @@ Emma's requirement analysis and design documents and other information can be fo
 - Django >= 3.2.9
 
 
-## External Library
+## External Libraries
 
 - Google API Client
 - WebTest
