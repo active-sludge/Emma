@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-tb6m)^l^*wt*db^*+@5bf3d0u%le^bm#8*496w4zzs)i^ck=)q
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '*',
+]
 
 
 # Application definition
@@ -55,7 +57,7 @@ ROOT_URLCONF = 'EmmaProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

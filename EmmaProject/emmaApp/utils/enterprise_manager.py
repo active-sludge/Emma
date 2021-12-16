@@ -25,7 +25,6 @@ enterprise_name = enterprise['name']
 # EAJmqckxDX-PV1eJGZUS5SYmrHcB1O-stL5DbRbcwYl3PyTV_YHPDSPjScQKNav2i747XJSZSGAf5ukOM4vfUtTadFXigwBMIlvee4YkpVGzw_UBwcBtwisw
 print('\nYour enterprise name is', enterprise_name)
 
-# Enterprise Name: enterprises/LC03hr5qbt
 
-# Paste your enterprise name here.
+# Paste the enterprise name here.
 # enterprise_name = 'enterprises/LC03hr5qbt'

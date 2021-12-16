@@ -15,7 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from emmaApp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # Auth
+    path('signup/', views.sign_up_user, name='signupuser'),
+    path('logout/', views.log_out_user, name='logoutuser'),
+    path('login/', views.log_in_user, name='loginuser'),
+
+    path('', views.home, name='home'),
 ]
