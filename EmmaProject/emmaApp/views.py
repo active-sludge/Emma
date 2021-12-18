@@ -6,7 +6,8 @@ from django.db import IntegrityError
 from django.shortcuts import render, redirect
 
 
-# Create your views here.
+# android_management = AndroidManagementAPI()
+
 
 def home(request):
     return render(request, 'emma/home.html')
@@ -35,9 +36,11 @@ def log_in_user(request):
     if request.method == "GET":
         return render(request, 'emma/login.html', {'form': AuthenticationForm()})
     else:
-        user = authenticate(request, username = request.POST['username'], password = request.POST['password'])
+        user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
         if user is None:
-            return render(request, 'emma/login.html', {'form': AuthenticationForm(), 'error': 'Username and password did not match.'})
+            return render(request, 'emma/login.html', {'form': AuthenticationForm(),
+                                                       'error': 'Username and password did not match.'}
+                          )
         else:
             login(request, user)
             return redirect('home')
@@ -48,3 +51,18 @@ def log_out_user(request):
     if request.method == 'POST':
         logout(request)
         return redirect('home')
+
+
+@login_required()
+def enterprise(request):
+    return render(request, 'emma/enterprise.html')
+
+
+@login_required()
+def create_enterprise(request):
+
+    return redirect('policies')
+
+
+def policies(request):
+    return render(request, 'emma/policies.html')

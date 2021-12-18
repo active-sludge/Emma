@@ -20,7 +20,7 @@ SCOPES = ['https://www.googleapis.com/auth/androidmanagement']
 
 # Run the OAuth flow.
 flow = InstalledAppFlow.from_client_config(CLIENT_CONFIG, SCOPES)
-credentials = flow.run_console()
+credentials = flow.run_local_server()
 
 # Create the API client.
 androidmanagement = build('androidmanagement', 'v1', credentials=credentials)

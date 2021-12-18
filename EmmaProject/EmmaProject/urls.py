@@ -26,4 +26,8 @@ urlpatterns = [
     path('login/', views.log_in_user, name='loginuser'),
 
     path('', views.home, name='home'),
+    path('enterprise', views.enterprise, name='enterprise'),
+    path('enterprise/create', views.create_enterprise, name='create_enterprise'),
+
+    path('policies', views.policies, name='policies'),
 ]
