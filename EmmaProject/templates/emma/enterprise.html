@@ -11,8 +11,25 @@
     <div class="col-md-7 text-center">
         <h1>Enterprise</h1>
         <p>Create an enterprise and enroll a device.</p>
-    <a role="button" class="btn btn-primary btn-lg" href="{% url 'create_enterprise' %}">Create and Enroll</a>
-    <br>
+
+        <br>
+
+        <form action="" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary" name="create_enterprise">Create enterprise</button>
+        </form>
+
+        <br>
+
+        {% if message %}
+
+            <p>Follow this <a href="{{ url }}">link</a> to create an enterprise. Then copy the enrolment token and paste it below.</p>
+
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Enterprise Token" aria-label="Enterprise Token" aria-describedby="submit_enterprise_token">
+              <button class="btn btn-primary" type="submit" name="enter_token" id="submit_enterprise_token">Enter Token</button>
+            </div>
+        {% endif %}
     </div>
 </div>
 

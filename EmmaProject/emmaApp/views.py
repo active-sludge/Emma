@@ -4,9 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
-
-
-# android_management = AndroidManagementAPI()
+from emmaApp.utils import android_management_api
 
 
 def home(request):
@@ -43,6 +41,7 @@ def log_in_user(request):
                           )
         else:
             login(request, user)
+            android_management_api.authenticate_google_user()
             return redirect('home')
 
 
@@ -55,13 +54,22 @@ def log_out_user(request):
 
 @login_required()
 def enterprise(request):
-    return render(request, 'emma/enterprise.html')
-
-
-@login_required()
-def create_enterprise(request):
-
-    return redirect('policies')
+    if request.method == 'GET':
+        return render(request, 'emma/enterprise.html')
+    else:
+        if 'create_enterprise' in request.POST:
+            url = android_management_api.create_enterprise()
+            context = {
+                'url': url,
+            }
+            return render(request, 'emma/enterprise.html', context)
+        elif 'enter_token' in request.POST:
+            token = request.GET.get('token')
+            enterprise_name = android_management_api.enter_enterprise_token(token)
+            context = {
+                'enterprise_name': enterprise_name,
+            }
+            return render(request, 'emma/enterprise.html', context)
 
 
 def policies(request):
