@@ -59,7 +59,6 @@ def enter_enterprise_token(token):
     return enterprise_name
 
 
-
 def enroll_device():
     # Run the OAuth flow.
     # Generate a signup URL where the enterprise admin can signup with a Gmail account.

@@ -64,7 +64,8 @@ def enterprise(request):
             }
             return render(request, 'emma/enterprise.html', context)
         elif 'enter_token' in request.POST:
-            token = request.GET.get('token')
+            token = request.POST['enterprise_token']
+            print(token)
             enterprise_name = android_management_api.enter_enterprise_token(token)
             context = {
                 'enterprise_name': enterprise_name,

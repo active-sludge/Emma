@@ -21,14 +21,18 @@
 
         <br>
 
-        {% if message %}
+        {% if url %}
+            <p>Follow this <a href="{{ url }}" target="_blank">link</a> to create an enterprise. Then copy the enrolment token and paste it below.</p>
 
-            <p>Follow this <a href="{{ url }}">link</a> to create an enterprise. Then copy the enrolment token and paste it below.</p>
-
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="Enterprise Token" aria-label="Enterprise Token" aria-describedby="submit_enterprise_token">
-              <button class="btn btn-primary" type="submit" name="enter_token" id="submit_enterprise_token">Enter Token</button>
-            </div>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <input type="text" class="form-control" placeholder="Enterprise Token" aria-label="Enterprise Token" aria-describedby="submit_enterprise_token" name="enterprise_token" id="enterprise_token">
+                    <button class="btn btn-primary" type="submit" name="enter_token" id="submit_enterprise_token">Enter Token</button>
+                </form>
+        {% elif enterprise_name %}
+            <p>
+               Your enterprise name is: {{ enterprise_name }}
+            </p>
         {% endif %}
     </div>
 </div>
