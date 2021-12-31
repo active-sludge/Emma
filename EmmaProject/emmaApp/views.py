@@ -52,7 +52,7 @@ def log_out_user(request):
         return redirect('home')
 
 
-@login_required()
+@login_required
 def enterprise(request):
     if request.method == 'GET':
         return render(request, 'emma/enterprise.html')
@@ -73,5 +73,24 @@ def enterprise(request):
             return render(request, 'emma/enterprise.html', context)
 
 
+@login_required
 def policies(request):
-    return render(request, 'emma/policies.html')
+    if request.method == 'GET':
+        return render(request, 'emma/policies.html')
+    else:
+        if 'create_policy' in request.POST:
+            policy_name = android_management_api.create_policy()
+            context = {
+                'policy_name': policy_name,
+            }
+            return render(request, 'emma/policies.html', context)
+        elif 'enroll_device' in request.POST:
+            policy_name = android_management_api.get_policy_name()
+            qrcode_url = android_management_api.enroll_device(policy_name)
+            context = {
+                'qrcode_url': qrcode_url,
+            }
+            return render(request, 'emma/policies.html', context)
+
+
+
