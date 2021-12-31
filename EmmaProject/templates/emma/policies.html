@@ -1,18 +1,38 @@
 {% extends "emma/base.html" %}
 
 {% block content %}
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
 <div class="row justify-content-center mt-5">
     <div class="col-md-7 text-center">
         <h1>Policies</h1>
         <p>Create and publish policies.</p>
-    <a role="button" class="btn btn-primary btn-lg" href="{% url 'home' %}">Create and Enroll</a>
-    <br>
+        <br>
+
+        <p>This policy is for enrollment purpose.</p>
+        <form action="" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary" name="create_policy">Create Policy</button>
+        </form>
+
+        {% if policy_name %}
+            <input type='hidden' value='{{policy_name}}' name='policy_name'>
+            <br>
+            <div class="alert alert-success" role="alert">
+                Policy created succesfully.
+                Policy name is: <h3>{{ policy_name }}</h3>
+            </div>
+        {% endif %}
+
+        <br>
+        <p>Enroll button creates a QR code to enroll a device.</p>
+        <form action="" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary" name="enroll_device">Enroll a Device</button>
+        </form>
+        <br>
+        {% if qrcode_url %}
+            <a href="{{ qrcode_url }}" target="_blank">Follow this link to open QR code.</a>
+        {% endif %}
     </div>
 </div>
 
