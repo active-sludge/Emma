@@ -1,3 +1,5 @@
+import json
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -93,4 +95,13 @@ def policies(request):
             return render(request, 'emma/policies.html', context)
 
 
+def devices(request):
+    if android_management_api.androidmanagement is None:
+        android_management_api.authenticate_google_user()
 
+    device_list_json = android_management_api.get_devices()
+    print(device_list_json)
+    context = {
+        'devices': device_list_json
+    }
+    return render(request, 'emma/devices.html', context)

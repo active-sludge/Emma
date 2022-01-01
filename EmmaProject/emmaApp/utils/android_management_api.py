@@ -21,7 +21,7 @@ CALLBACK_URL = 'https://storage.googleapis.com/android-management-quick-start/en
 androidmanagement = None
 signup_url = None
 enterprise = None
-enterprise_name = None
+enterprise_name = 'enterprises/LC03hr5qbt'
 
 
 def authenticate_google_user():
@@ -102,3 +102,13 @@ def enroll_device(policy_name):
 def get_policy_name():
     policy_name = enterprise_name + '/policies/policy1'
     return policy_name
+
+
+def get_devices():
+    # enterprises / LC03hr5qbt
+    devices = androidmanagement.enterprises().devices().list(
+        parent=enterprise_name
+    ).execute()
+
+    print(devices)
+    return devices
