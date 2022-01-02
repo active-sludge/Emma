@@ -1,9 +1,13 @@
+import json
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
+from django.utils.safestring import SafeString
+
 from emmaApp.utils import android_management_api
 
 
@@ -91,6 +95,22 @@ def policies(request):
                 'qrcode_url': qrcode_url,
             }
             return render(request, 'emma/policies.html', context)
+
+
+def devices(request):
+    if android_management_api.androidmanagement is None:
+        android_management_api.authenticate_google_user()
+
+    if request.method == 'POST':
+        pass
+    else:
+        devices = android_management_api.get_devices()
+
+        context = {
+            'devices': devices
+        }
+
+        return render(request, 'emma/devices.html', context)
 
 
 
