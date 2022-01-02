@@ -1,0 +1,41 @@
+{% extends "emma/base.html" %}
+{% block content %}
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Device Name</th>
+            <th scope="col">Device Serial Number</th>
+            <th scope="col">Brand</th>
+            <th scope="col">Model</th>
+            <th scope="col">Status</th>
+            <th scope="col">Enrollment Time</th>
+
+        </tr>
+        </thead>
+        <tbody>
+            {% if devices %}
+                {% for device in devices %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ device.name }}</td>
+                        <td>{{ device.hardwareInfo.serialNumber }}</td>
+                        <td>{{ device.hardwareInfo.brand }}</td>
+                        <td>@{{ device.hardwareInfo.model }}</td>
+                        <td>{{ device.state }}</td>
+                        <td>{{ device.enrollmentTime}}</td>
+                        <td>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <button type="button" class="btn btn-danger" disabled>Remove</button>
+
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+
+{% endblock %}
