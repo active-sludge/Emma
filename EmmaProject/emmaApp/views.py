@@ -6,6 +6,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
+from django.utils.safestring import SafeString
+
 from emmaApp.utils import android_management_api
 
 
@@ -99,9 +101,9 @@ def devices(request):
     if android_management_api.androidmanagement is None:
         android_management_api.authenticate_google_user()
 
-    device_list_json = android_management_api.get_devices()
-    print(device_list_json)
+    devices = android_management_api.get_devices()
+
     context = {
-        'devices': device_list_json
+        'devices': devices
     }
     return render(request, 'emma/devices.html', context)

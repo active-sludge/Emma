@@ -110,5 +110,5 @@ def get_devices():
         parent=enterprise_name
     ).execute()
 
-    print(devices)
-    return devices
+    return devices['devices']
+
