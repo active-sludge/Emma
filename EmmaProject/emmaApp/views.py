@@ -101,9 +101,16 @@ def devices(request):
     if android_management_api.androidmanagement is None:
         android_management_api.authenticate_google_user()
 
-    devices = android_management_api.get_devices()
+    if request.method == 'POST':
+        pass
+    else:
+        devices = android_management_api.get_devices()
 
-    context = {
-        'devices': devices
-    }
-    return render(request, 'emma/devices.html', context)
+        context = {
+            'devices': devices
+        }
+
+        return render(request, 'emma/devices.html', context)
+
+
+

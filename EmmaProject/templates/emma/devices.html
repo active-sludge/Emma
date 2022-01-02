@@ -11,6 +11,7 @@
             <th scope="col">Model</th>
             <th scope="col">Status</th>
             <th scope="col">Enrollment Time</th>
+
         </tr>
         </thead>
         <tbody>
@@ -24,6 +25,13 @@
                         <td>@{{ device.hardwareInfo.model }}</td>
                         <td>{{ device.state }}</td>
                         <td>{{ device.enrollmentTime}}</td>
+                        <td>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <button type="button" class="btn btn-danger" disabled>Remove</button>
+
+                            </form>
+                        </td>
                     </tr>
                 {% endfor %}
             {% endif %}
