@@ -6,62 +6,83 @@
 <div class="row justify-content-center mt-5">
     <div class="col-md-7 text-center">
         <h1>Policies</h1>
-        <p>Create and publish policies.</p>
-        <br>
+        
+        <ol>
+            <li>Create a policy. This policy is needed for enrollment.</li>
+                <input class="form-check-input flex-shrink-0" type="checkbox" value="" checked="">
+                <span>
+                    Install Google I/O Android App
+                </span>
+        
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary" name="create_policy">Create Policy</button>
+                </form>
+                <br>
+                <br>
+                {% if policy_name %}
+                    <input type='hidden' value='{{policy_name}}' name='policy_name'>
+                    <br>
+                    <div class="alert alert-success" role="alert">
+                        Policy created succesfully.
+                        Policy name is: <h3>{{ policy_name }}</h3>
+                    </div>
+                {% endif %}
+                <br>
+                <br>
+            <li>Create a QR code to enroll a device.</li>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary" name="enroll_device">Create QR Code</button>
+                </form>
 
-        <p>This policy is for enrollment purpose.</p>
-        <form action="" method="post">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-primary" name="create_policy">Create Policy</button>
-        </form>
+                <br>
+                <br>
+                <br>
+                <br>
+            
+            <li>Scan the QR code.</li>
+                {% if qrcode_url %}
+                    <img src="{{ qrcode_url }}" alt="..." class="img-thumbnail">
+                    <br>
+                    <a href="{{ qrcode_url }}" target="_blank">Follow this link to open QR code in new tab.</a>
+                {% endif %}
+        </ol>
 
-        {% if policy_name %}
-            <input type='hidden' value='{{policy_name}}' name='policy_name'>
-            <br>
-            <div class="alert alert-success" role="alert">
-                Policy created succesfully.
-                Policy name is: <h3>{{ policy_name }}</h3>
-            </div>
-        {% endif %}
-
-        <br>
-        <p>Enroll button creates a QR code to enroll a device.</p>
-        <form action="" method="post">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-primary" name="enroll_device">Enroll a Device</button>
-        </form>
-        <br>
-        {% if qrcode_url %}
-            <a href="{{ qrcode_url }}" target="_blank">Follow this link to open QR code.</a>
-        {% endif %}
     </div>
 </div>
 
 
-
-<div class="d-flex gap-5 justify-content-center">
-    <div class="list-group mx-0">
-        <label class="list-group-item d-flex gap-2">
-            <input class="form-check-input flex-shrink-0" type="checkbox" value="" checked="">
-            <span>
-                Disable Bluetooth
-            </span>
-        </label>
-
-        <label class="list-group-item d-flex gap-2">
-            <input class="form-check-input flex-shrink-0" type="checkbox" value="">
-              <span>
-                Disable SMS
-              </span>
+<div class="row justify-content-center mt-5">
+    <div class="col-md-7 text-center">
+    <h1>Other policy options</h1>
+    
+        <div class="list-group mx-0">
+            <label class="list-group-item d-flex gap-2">
+                <input class="form-check-input flex-shrink-0" type="checkbox" value="" checked="">
+                <span>
+                    Disable Bluetooth
+                </span>
             </label>
-        <label class="list-group-item d-flex gap-2">
-            <input class="form-check-input flex-shrink-0" type="checkbox" value="">
-            <span>
-                Disable Wallpaper Setting
-                <small class="d-block text-muted">User is not allowed to change wallpaper.</small>
-            </span>
-        </label>
+            
+            <label class="list-group-item d-flex gap-2">
+                <input class="form-check-input flex-shrink-0" type="checkbox" value="">
+                <span>
+                    Disable SMS
+                  </span>
+            </label>
+            <label class="list-group-item d-flex gap-2">
+                <input class="form-check-input flex-shrink-0" type="checkbox" value="">
+                <span>
+                    Disable Wallpaper Setting
+                    <small class="d-block text-muted">User is not allowed to change wallpaper.</small>
+                </span>
+            </label>
     </div>
 </div>
+
+
+
+
 
 {% endblock %}
