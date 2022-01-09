@@ -3,22 +3,107 @@
 
 {% block content %}
 
+<ol>
 <div class="row justify-content-center mt-5">
     <div class="col-md-7 text-center">
         <h1>Policies</h1>
+         
+            <li>Pick your policy options</li>
+    </div>
+</div>
+
+
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="d-flex gap-5 justify-content-center">
         
-        <ol>
-            <li>Create a policy. This policy is needed for enrollment.</li>
-                <input class="form-check-input flex-shrink-0" type="checkbox" value="" checked="">
+        <div class="list-group mx-0">
+            <label class="list-group-item d-flex gap-2">
+                <input class="form-check-input flex-shrink-0" type="checkbox" value="bluetoothDisabled" id="bluetoothDisabled" name="policy_options">
                 <span>
-                    Install Google I/O Android App
+                    Disable Bluetooth
+                    <small class="d-block text-muted">bluetoothDisabled</small>
                 </span>
+            </label>
+            <label class="list-group-item d-flex gap-2">
+                <input class="form-check-input flex-shrink-0" type="checkbox" value="wifiConfigDisabled" id="wifiConfigDisabled" name="policy_options">
+                <span>
+                    Disable Wifi Config
+                    <small class="d-block text-muted">wifiConfigDisabled</small>
+                </span>
+            </label>
+            <label class="list-group-item d-flex gap-2">
+                <input class="form-check-input flex-shrink-0" type="checkbox" value="smsDisabled" id="smsDisabled" name="policy_options">
+                <span>
+                    Disable SMS
+                    <small class="d-block text-muted">smsDisabled</small>
+                </span>
+            </label>
+        </div>
+    
+        <div class="list-group mx-0">
+            <label class="list-group-item d-flex gap-2">
+                <input class="form-check-input flex-shrink-0" type="checkbox" value="addUserDisabled" id="addUserDisabled" name="policy_options">
+                <span>
+                    Disable User Adding
+                    <small class="d-block text-muted">addUserDisabled</small>
+                </span>
+            </label>
+            <label class="list-group-item d-flex gap-2">
+                <input class="form-check-input flex-shrink-0" type="checkbox" value="outgoingCallsDisabled" id="outgoingCallsDisabled" name="policy_options">
+                <span>
+                    Disable Outgoing Calls
+                    <small class="d-block text-muted">outgoingCallsDisabled</small>
+                </span>
+            </label>
+            <label class="list-group-item d-flex gap-2">
+                <input class="form-check-input flex-shrink-0" type="checkbox" value="smsDisabled" id="smsDisabled" name="policy_options">
+                <span>
+                    Disable SMS
+                    <small class="d-block text-muted">smsDisabled</small>
+                </span>
+            </label>
+        </div>
+    
+        <div class="list-group mx-0">
+            <label class="list-group-item d-flex gap-2">
+                <input class="form-check-input flex-shrink-0" type="checkbox" value="smsDisabled" id="smsDisabled" name="policy_options">
+                <span>
+                    Disable SMS
+                    <small class="d-block text-muted">smsDisabled</small>
+                </span>
+            </label>
+            <label class="list-group-item d-flex gap-2">
+                <input class="form-check-input flex-shrink-0" type="checkbox" value="smsDisabled" id="smsDisabled" name="policy_options">
+                <span>
+                    Disable SMS
+                    <small class="d-block text-muted">smsDisabled</small>
+                </span>
+            </label>
+            <label class="list-group-item d-flex gap-2">
+                <input class="form-check-input flex-shrink-0" type="checkbox" value="smsDisabled" id="smsDisabled" name="policy_options">
+                <span>
+                    Disable SMS
+                    <small class="d-block text-muted">smsDisabled</small>
+                </span>
+            </label>
+        </div>
         
-                <form action="" method="post">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-primary" name="create_policy">Create Policy</button>
-                </form>
-                <br>
+    </div>
+    
+    
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-7 text-center">
+            <li>Create a policy. This policy is needed for enrollment.</li>
+            <button type="submit" class="btn btn-primary" name="create_policy">Create Policy</button>
+        </div>
+    </div>
+    
+</form>
+
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-7 text-center">
                 <br>
                 {% if policy_name %}
                     <input type='hidden' value='{{policy_name}}' name='policy_name'>
@@ -26,6 +111,9 @@
                     <div class="alert alert-success" role="alert">
                         Policy created succesfully.
                         Policy name is: <h3>{{ policy_name }}</h3>
+                        {% if policy_options %}
+                            Selected options: <h3>{{ policy_options }}</h3>
+                        {% endif %}
                     </div>
                 {% endif %}
                 <br>
@@ -51,37 +139,6 @@
 
     </div>
 </div>
-
-
-<div class="row justify-content-center mt-5">
-    <div class="col-md-7 text-center">
-    <h1>Other policy options</h1>
-    
-        <div class="list-group mx-0">
-            <label class="list-group-item d-flex gap-2">
-                <input class="form-check-input flex-shrink-0" type="checkbox" value="" checked="">
-                <span>
-                    Disable Bluetooth
-                </span>
-            </label>
-            
-            <label class="list-group-item d-flex gap-2">
-                <input class="form-check-input flex-shrink-0" type="checkbox" value="">
-                <span>
-                    Disable SMS
-                  </span>
-            </label>
-            <label class="list-group-item d-flex gap-2">
-                <input class="form-check-input flex-shrink-0" type="checkbox" value="">
-                <span>
-                    Disable Wallpaper Setting
-                    <small class="d-block text-muted">User is not allowed to change wallpaper.</small>
-                </span>
-            </label>
-    </div>
-</div>
-
-
 
 
 
