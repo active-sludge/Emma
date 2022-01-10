@@ -12,7 +12,11 @@
             {% csrf_token %}
             <li>Give your policy a name</li>
             <div class="input-group mb-3">
-                <span class="input-group-text">enterprises/{enterrise_name}/policies/</span>
+                {% if enterprise_name %}
+                    <span class="input-group-text">{{ enterprise_name }}/policies/</span>
+                {% else %}
+                    <span class="input-group-text">Create an enterprise!</span>
+                {% endif %}
                 <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="marketingPolicy1" name="policy_name">
             </div>
             <br>

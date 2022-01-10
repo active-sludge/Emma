@@ -83,17 +83,22 @@ def policies(request):
         android_management_api.authenticate_google_user()
 
     if request.method == 'GET':
-        return render(request, 'emma/policies.html')
+        enterprise_name = android_management_api.get_enterprise()
+        context = {
+            'enterprise_name': enterprise_name
+        }
+        return render(request, 'emma/policies.html', context)
     else:
         if 'create_policy' in request.POST:
             policy_dict = {}
             policy_options = request.POST.getlist('policy_options')
             policy_name = request.POST.get('policy_name')
-            print(policy_name)
+
             for policy_option in policy_options:
                 print(policy_option)
                 policy_dict[policy_option] = 'true'
 
+            print(policy_name)
             print(policy_dict)
 
             policy_name = android_management_api.create_policy()
