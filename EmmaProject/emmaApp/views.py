@@ -88,6 +88,8 @@ def policies(request):
         if 'create_policy' in request.POST:
             policy_dict = {}
             policy_options = request.POST.getlist('policy_options')
+            policy_name = request.POST.get('policy_name')
+            print(policy_name)
             for policy_option in policy_options:
                 print(policy_option)
                 policy_dict[policy_option] = 'true'

@@ -7,16 +7,23 @@
 <div class="row justify-content-center mt-5">
     <div class="col-md-7 text-center">
         <h1>Policies</h1>
+    
+        <form action="" method="post">
+            {% csrf_token %}
+            <li>Give your policy a name</li>
+            <div class="input-group mb-3">
+                <span class="input-group-text">enterprises/{enterrise_name}/policies/</span>
+                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="marketingPolicy1" name="policy_name">
+            </div>
+            <br>
          
             <li>Pick your policy options</li>
+            
     </div>
 </div>
 
 
-<form action="" method="post">
-    {% csrf_token %}
     <div class="d-flex gap-5 justify-content-center">
-        
         <div class="list-group mx-0">
             <label class="list-group-item d-flex gap-2">
                 <input class="form-check-input flex-shrink-0" type="checkbox" value="bluetoothDisabled" id="bluetoothDisabled" name="policy_options">
@@ -57,34 +64,34 @@
                 </span>
             </label>
             <label class="list-group-item d-flex gap-2">
-                <input class="form-check-input flex-shrink-0" type="checkbox" value="smsDisabled" id="smsDisabled" name="policy_options">
+                <input class="form-check-input flex-shrink-0" type="checkbox" value="dataRoamingDisabled" id="dataRoamingDisabled" name="policy_options">
                 <span>
-                    Disable SMS
-                    <small class="d-block text-muted">smsDisabled</small>
+                    Disable Roaming Data
+                    <small class="d-block text-muted">dataRoamingDisabled</small>
                 </span>
             </label>
         </div>
     
         <div class="list-group mx-0">
             <label class="list-group-item d-flex gap-2">
-                <input class="form-check-input flex-shrink-0" type="checkbox" value="smsDisabled" id="smsDisabled" name="policy_options">
+                <input class="form-check-input flex-shrink-0" type="checkbox" value="usbFileTransferDisabled" id="usbFileTransferDisabled" name="policy_options">
                 <span>
-                    Disable SMS
-                    <small class="d-block text-muted">smsDisabled</small>
+                    Disable USB File Transfer
+                    <small class="d-block text-muted">usbFileTransferDisabled</small>
                 </span>
             </label>
             <label class="list-group-item d-flex gap-2">
-                <input class="form-check-input flex-shrink-0" type="checkbox" value="smsDisabled" id="smsDisabled" name="policy_options">
+                <input class="form-check-input flex-shrink-0" type="checkbox" value="shareLocationDisabled" id="shareLocationDisabled" name="policy_options">
                 <span>
-                    Disable SMS
-                    <small class="d-block text-muted">smsDisabled</small>
+                    Disable Location Sharing
+                    <small class="d-block text-muted">shareLocationDisabled</small>
                 </span>
             </label>
             <label class="list-group-item d-flex gap-2">
-                <input class="form-check-input flex-shrink-0" type="checkbox" value="smsDisabled" id="smsDisabled" name="policy_options">
+                <input class="form-check-input flex-shrink-0" type="checkbox" value="setWallpaperDisabled" id="setWallpaperDisabled" name="policy_options">
                 <span>
-                    Disable SMS
-                    <small class="d-block text-muted">smsDisabled</small>
+                    Disable Wallpaper Setting
+                    <small class="d-block text-muted">setWallpaperDisabled</small>
                 </span>
             </label>
         </div>
