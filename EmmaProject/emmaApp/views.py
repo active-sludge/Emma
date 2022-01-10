@@ -79,13 +79,25 @@ def enterprise(request):
 
 @login_required
 def policies(request):
+    if android_management_api.androidmanagement is None:
+        android_management_api.authenticate_google_user()
+
     if request.method == 'GET':
         return render(request, 'emma/policies.html')
     else:
         if 'create_policy' in request.POST:
+            policy_dict = {}
+            policy_options = request.POST.getlist('policy_options')
+            for policy_option in policy_options:
+                print(policy_option)
+                policy_dict[policy_option] = 'true'
+
+            print(policy_dict)
+
             policy_name = android_management_api.create_policy()
             context = {
                 'policy_name': policy_name,
+                'policy_options': policy_options
             }
             return render(request, 'emma/policies.html', context)
         elif 'enroll_device' in request.POST:
