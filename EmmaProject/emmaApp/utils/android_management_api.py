@@ -104,23 +104,37 @@ def get_policy_name():
     return policy_name
 
 
-def get_enterprise():
+def get_enterprise_name():
     enterprise_list = androidmanagement.enterprises().list(
         projectId=cloud_project_id
     ).execute()
 
     print(enterprise_list)
     enterprises_name = enterprise_list['enterprises'][0]['name']
+    enterprise_display_name = enterprise_list['enterprises'][0]['enterpriseDisplayName']
     print(enterprises_name)
+    print(enterprise_display_name)
+    global enterprise_name
+    enterprise_name = enterprises_name
 
     return enterprises_name
 
 
 def get_devices():
-    # enterprises / LC03hr5qbt
+    print(enterprise_name)
     devices = androidmanagement.enterprises().devices().list(
-        parent=enterprise_name
+        parent=get_enterprise_name()
     ).execute()
 
-    return devices['devices']
+    if devices:
+        return devices['devices']
+    else:
+        return None
+
+
+def delete_device(device_id):
+    print(device_id)
+    androidmanagement.enterprises().devices().delete(
+        name=str(device_id)
+    ).execute()
 

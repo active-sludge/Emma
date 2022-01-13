@@ -28,8 +28,8 @@
                         <td>
                             <form method="POST">
                                 {% csrf_token %}
-                                <button type="button" class="btn btn-danger" disabled>Remove</button>
-
+                                <input type='hidden' id="device_name" value='{{ device.name }}' name='device_name'>
+                                <button type="submit" class="btn btn-danger" name="delete_device" value="{{ device_name }}">Remove</button>
                             </form>
                         </td>
                     </tr>

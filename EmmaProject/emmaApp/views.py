@@ -121,15 +121,19 @@ def devices(request):
         android_management_api.authenticate_google_user()
 
     if request.method == 'POST':
-        pass
+        if 'delete_device' in request.POST:
+            device_name = request.POST.get('device_name')
+            print(device_name)
+            android_management_api.delete_device(device_name)
+            return redirect('devices')
+        else:
+            pass
     else:
         devices = android_management_api.get_devices()
+        print(devices)
 
         context = {
             'devices': devices
         }
 
         return render(request, 'emma/devices.html', context)
-
-
-
