@@ -149,3 +149,13 @@ def delete_device(device_id):
     androidmanagement.enterprises().devices().delete(
         name=str(device_id)
     ).execute()
+
+
+def lock_device(device_id):
+    print(device_id)
+    androidmanagement.enterprises().devices().issueCommand(
+        name=device_id,
+        body={
+            "type": "LOCK"
+        }
+    ).execute()

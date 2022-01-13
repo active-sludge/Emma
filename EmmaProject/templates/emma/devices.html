@@ -1,6 +1,6 @@
 {% extends "emma/base.html" %}
 {% block content %}
-
+<div class="container-lg">
     <table class="table table-striped">
         <thead>
         <tr>
@@ -10,7 +10,6 @@
             <th scope="col">Brand</th>
             <th scope="col">Model</th>
             <th scope="col">Status</th>
-            <th scope="col">Enrollment Time</th>
 
         </tr>
         </thead>
@@ -24,18 +23,20 @@
                         <td>{{ device.hardwareInfo.brand }}</td>
                         <td>@{{ device.hardwareInfo.model }}</td>
                         <td>{{ device.state }}</td>
-                        <td>{{ device.enrollmentTime}}</td>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input type='hidden' id="device_name" value='{{ device.name }}' name='device_name'>
                         <td>
-                            <form method="POST">
-                                {% csrf_token %}
-                                <input type='hidden' id="device_name" value='{{ device.name }}' name='device_name'>
-                                <button type="submit" class="btn btn-danger" name="delete_device" value="{{ device_name }}">Remove</button>
-                            </form>
+                                <button type="submit" class="btn btn-primary" name="lock_device" value="{{ device_name }}">Lock screen</button>
                         </td>
+                        <td>
+                                <button type="submit" class="btn btn-danger" name="delete_device" value="{{ device_name }}">Remove from enrollment</button>
+                        </td>
+                        </form>
                     </tr>
                 {% endfor %}
             {% endif %}
         </tbody>
     </table>
-
+</div>
 {% endblock %}

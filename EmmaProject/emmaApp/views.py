@@ -138,6 +138,11 @@ def devices(request):
             print(device_name)
             android_management_api.delete_device(device_name)
             return redirect('devices')
+        elif 'lock_device' in request.POST:
+            device_name = request.POST.get('device_name')
+            print(device_name)
+            android_management_api.lock_device(device_name)
+            return redirect('devices')
         else:
             pass
     else:
