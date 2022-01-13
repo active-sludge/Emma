@@ -83,7 +83,7 @@ def policies(request):
         android_management_api.authenticate_google_user()
 
     if request.method == 'GET':
-        enterprise_name = android_management_api.get_enterprise()
+        enterprise_name = android_management_api.get_enterprise_name()
         context = {
             'enterprise_name': enterprise_name
         }
@@ -94,22 +94,34 @@ def policies(request):
             policy_options = request.POST.getlist('policy_options')
             policy_name = request.POST.get('policy_name')
 
+            # policy_dict['applications'] = [
+            #     {
+            #         "packageName": "com.google.samples.apps.iosched",
+            #         "installType": "FORCE_INSTALLED"
+            #     }
+            # ]
+            #
+            # policy_dict['debuggingFeaturesAllowed'] = True
+
             for policy_option in policy_options:
                 print(policy_option)
-                policy_dict[policy_option] = 'true'
+                policy_dict[policy_option] = True
 
             print(policy_name)
             print(policy_dict)
 
-            policy_name = android_management_api.create_policy()
+            policy_full_name = android_management_api.create_policy(policy_name, policy_dict)
             context = {
-                'policy_name': policy_name,
+                'policy_name': policy_full_name,
                 'policy_options': policy_options
             }
             return render(request, 'emma/policies.html', context)
         elif 'enroll_device' in request.POST:
-            policy_name = android_management_api.get_policy_name()
-            qrcode_url = android_management_api.enroll_device(policy_name)
+            enterprise_name = android_management_api.get_enterprise_name()
+            policy_full_name = request.POST.get('policy_name')
+            print(enterprise_name)
+            print(policy_full_name)
+            qrcode_url = android_management_api.enroll_device(enterprise_name, policy_full_name)
             context = {
                 'qrcode_url': qrcode_url,
             }

@@ -21,7 +21,7 @@ CALLBACK_URL = 'https://storage.googleapis.com/android-management-quick-start/en
 androidmanagement = None
 signup_url = None
 enterprise = None
-enterprise_name = 'enterprises/LC03hr5qbt'
+enterprise_name = None
 
 
 def authenticate_google_user():
@@ -61,7 +61,19 @@ def enter_enterprise_token(token):
     return enterprise_name
 
 
-def create_policy():
+def create_policy(policy_name, policy_options):
+    policy_full_name = get_enterprise_name() + '/policies/' + policy_name
+    print(policy_options)
+    print(policy_options)
+    print(policy_full_name)
+    androidmanagement.enterprises().policies().patch(
+        name=policy_full_name,
+        body=policy_options
+    ).execute()
+    return policy_full_name
+
+
+def create_default_policy():
     # enterprise_name = 'enterprises/LC03hr5qbt'
     policy_name = enterprise_name + '/policies/policy1'
     policy_json = '''
@@ -82,7 +94,7 @@ def create_policy():
     return policy_name
 
 
-def enroll_device(policy_name):
+def enroll_device(enterprise_name, policy_name):
     enrollment_token = androidmanagement.enterprises().enrollmentTokens().create(
         parent=enterprise_name,
         body={"policyName": policy_name}
@@ -137,4 +149,3 @@ def delete_device(device_id):
     androidmanagement.enterprises().devices().delete(
         name=str(device_id)
     ).execute()
-

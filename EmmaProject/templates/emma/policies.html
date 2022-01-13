@@ -132,6 +132,7 @@
             <li>Create a QR code to enroll a device.</li>
                 <form action="" method="post">
                     {% csrf_token %}
+                    <input type='hidden' id="policy_name" value='{{ policy_name }}' name='policy_name'>
                     <button type="submit" class="btn btn-primary" name="enroll_device">Create QR Code</button>
                 </form>
 
