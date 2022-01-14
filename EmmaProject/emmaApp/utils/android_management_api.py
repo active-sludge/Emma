@@ -74,17 +74,27 @@ def create_policy(policy_name, policy_options):
 
 
 def create_default_policy():
-    # enterprise_name = 'enterprises/LC03hr5qbt'
-    policy_name = enterprise_name + '/policies/policy1'
+    policy_name = 'enterprises/LC023wxbu6/policies/policy1'
+    print(policy_name)
     policy_json = '''
         {
             "applications": [
                 {
                     "packageName": "com.google.samples.apps.iosched",
                     "installType": "FORCE_INSTALLED"
+                },
+                {
+                    "installType": "AVAILABLE",
+                    "packageName": "com.google.android.apps.docs"
                 }
             ],
-            "debuggingFeaturesAllowed": true
+            "debuggingFeaturesAllowed": true,
+            "bluetoothDisabled": true,
+            "setWallpaperDisabled": true,
+            "cameraDisabled": true,
+            "bluetoothDisabled": true,
+            "usbFileTransferDisabled": true,
+            "screenCaptureDisabled": true
         }
         '''
     androidmanagement.enterprises().policies().patch(

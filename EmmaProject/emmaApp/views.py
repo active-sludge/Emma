@@ -94,14 +94,14 @@ def policies(request):
             policy_options = request.POST.getlist('policy_options')
             policy_name = request.POST.get('policy_name')
 
-            # policy_dict['applications'] = [
-            #     {
-            #         "packageName": "com.google.samples.apps.iosched",
-            #         "installType": "FORCE_INSTALLED"
-            #     }
-            # ]
-            #
-            # policy_dict['debuggingFeaturesAllowed'] = True
+            policy_dict['applications'] = [
+                {
+                    "packageName": "com.google.samples.apps.iosched",
+                    "installType": "FORCE_INSTALLED"
+                }
+            ]
+
+            policy_dict['debuggingFeaturesAllowed'] = True
 
             for policy_option in policy_options:
                 print(policy_option)
@@ -110,7 +110,8 @@ def policies(request):
             print(policy_name)
             print(policy_dict)
 
-            policy_full_name = android_management_api.create_policy(policy_name, policy_dict)
+            # policy_full_name = android_management_api.create_policy(policy_name, policy_dict)
+            policy_full_name = android_management_api.create_default_policy()
             context = {
                 'policy_name': policy_full_name,
                 'policy_options': policy_options
