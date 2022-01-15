@@ -24,6 +24,7 @@ def sign_up_user(request):
                 user = User.objects.create_user(request.POST['username'], password=request.POST['password1'])
                 user.save()
                 login(request, user)
+                android_management_api.authenticate_google_user()
                 return redirect('home')
             except IntegrityError:
                 return render(request, 'emma/signup.html',
@@ -94,12 +95,12 @@ def policies(request):
             policy_options = request.POST.getlist('policy_options')
             policy_name = request.POST.get('policy_name')
 
-            policy_dict['applications'] = [
-                {
-                    "packageName": "com.google.samples.apps.iosched",
-                    "installType": "FORCE_INSTALLED"
-                }
-            ]
+            # policy_dict['applications'] = [
+            #     {
+            #         "packageName": "com.google.samples.apps.iosched",
+            #         "installType": "FORCE_INSTALLED"
+            #     }
+            # ]
 
             policy_dict['debuggingFeaturesAllowed'] = True
 
