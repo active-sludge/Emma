@@ -7,7 +7,7 @@ from googleapiclient.discovery import build
 cloud_project_id = 'swe599-emma'
 
 CLIENT_CONFIG = {
-    'installed': {
+    'web': {
         'client_id': '882252295571-uvkkfelq073vq73bbq9cmr0rn8bt80ee.apps.googleusercontent.com',
         'client_secret': 'S2QcoBe0jxNLUoqnpeksCLxI',
         'auth_uri': 'https://accounts.google.com/o/oauth2/auth',
