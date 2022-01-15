@@ -110,8 +110,8 @@ def policies(request):
             print(policy_name)
             print(policy_dict)
 
-            # policy_full_name = android_management_api.create_policy(policy_name, policy_dict)
-            policy_full_name = android_management_api.create_default_policy()
+            policy_full_name = android_management_api.create_policy(policy_name, policy_dict)
+            # policy_full_name = android_management_api.create_default_policy()
             context = {
                 'policy_name': policy_full_name,
                 'policy_options': policy_options
