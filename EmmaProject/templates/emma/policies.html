@@ -5,7 +5,7 @@
 
 <ol>
 <div class="row justify-content-center mt-5">
-    <div class="col-md-7 text-center">
+    <div class="col-md-8 text-center">
         <h1>Policies</h1>
     
         <form action="" method="post">
@@ -23,83 +23,38 @@
          
             <li>Pick your policy options</li>
             
-    </div>
-</div>
-
-
-    <div class="d-flex gap-5 justify-content-center">
-        <div class="list-group mx-0">
-            <label class="list-group-item d-flex gap-2">
-                <input class="form-check-input flex-shrink-0" type="checkbox" value="bluetoothDisabled" id="bluetoothDisabled" name="policy_options">
-                <span>
-                    Disable Bluetooth
-                    <small class="d-block text-muted">bluetoothDisabled</small>
-                </span>
-            </label>
-            <label class="list-group-item d-flex gap-2">
-                <input class="form-check-input flex-shrink-0" type="checkbox" value="wifiConfigDisabled" id="wifiConfigDisabled" name="policy_options">
-                <span>
-                    Disable Wifi Config
-                    <small class="d-block text-muted">wifiConfigDisabled</small>
-                </span>
-            </label>
-            <label class="list-group-item d-flex gap-2">
-                <input class="form-check-input flex-shrink-0" type="checkbox" value="smsDisabled" id="smsDisabled" name="policy_options">
-                <span>
-                    Disable SMS
-                    <small class="d-block text-muted">smsDisabled</small>
-                </span>
-            </label>
+            <h5>Bring you own device(BYOD)</h5>
+                <div class="d-flex gap-5 justify-content-center">
+                    <div class="list-group mx-0">
+                        <label class="list-group-item">
+                            <input class="form-check-input flex-shrink-0" type="checkbox" value="bluetoothDisabled" id="bluetoothDisabled" name="policy_options">
+                            <span>
+                            Disable Bluetooth
+                            <small class="d-block text-muted">bluetoothDisabled</small>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            
+            <h5>Only Fully Managed Devices</h5>
+            <div class="container">
+                <div class="row row-cols-3">
+                    {% if fully_managed_policy_option_list %}
+                        {% for fully_managed_policy_option in fully_managed_policy_option_list %}
+                            <div class="col">
+                                 <label class="list-group-item">
+                                    <input class="form-check-input flex-shrink-0" type="checkbox" value="{{fully_managed_policy_option.policy_key}}" id="{{fully_managed_policy_option.policy_key}}" name="policy_options">
+                                    <span>
+                                        Disable Adding User
+                                        <small class="d-block text-muted text-left">Whether adding new users and profiles is disabled.</small>
+                                    </span>
+                                </label>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
         </div>
-    
-        <div class="list-group mx-0">
-            <label class="list-group-item d-flex gap-2">
-                <input class="form-check-input flex-shrink-0" type="checkbox" value="addUserDisabled" id="addUserDisabled" name="policy_options">
-                <span>
-                    Disable User Adding
-                    <small class="d-block text-muted">addUserDisabled</small>
-                </span>
-            </label>
-            <label class="list-group-item d-flex gap-2">
-                <input class="form-check-input flex-shrink-0" type="checkbox" value="outgoingCallsDisabled" id="outgoingCallsDisabled" name="policy_options">
-                <span>
-                    Disable Outgoing Calls
-                    <small class="d-block text-muted">outgoingCallsDisabled</small>
-                </span>
-            </label>
-            <label class="list-group-item d-flex gap-2">
-                <input class="form-check-input flex-shrink-0" type="checkbox" value="dataRoamingDisabled" id="dataRoamingDisabled" name="policy_options">
-                <span>
-                    Disable Roaming Data
-                    <small class="d-block text-muted">dataRoamingDisabled</small>
-                </span>
-            </label>
-        </div>
-    
-        <div class="list-group mx-0">
-            <label class="list-group-item d-flex gap-2">
-                <input class="form-check-input flex-shrink-0" type="checkbox" value="usbFileTransferDisabled" id="usbFileTransferDisabled" name="policy_options">
-                <span>
-                    Disable USB File Transfer
-                    <small class="d-block text-muted">usbFileTransferDisabled</small>
-                </span>
-            </label>
-            <label class="list-group-item d-flex gap-2">
-                <input class="form-check-input flex-shrink-0" type="checkbox" value="shareLocationDisabled" id="shareLocationDisabled" name="policy_options">
-                <span>
-                    Disable Location Sharing
-                    <small class="d-block text-muted">shareLocationDisabled</small>
-                </span>
-            </label>
-            <label class="list-group-item d-flex gap-2">
-                <input class="form-check-input flex-shrink-0" type="checkbox" value="setWallpaperDisabled" id="setWallpaperDisabled" name="policy_options">
-                <span>
-                    Disable Wallpaper Setting
-                    <small class="d-block text-muted">setWallpaperDisabled</small>
-                </span>
-            </label>
-        </div>
-        
     </div>
     
     

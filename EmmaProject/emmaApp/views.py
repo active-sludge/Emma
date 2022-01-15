@@ -85,8 +85,10 @@ def policies(request):
 
     if request.method == 'GET':
         enterprise_name = android_management_api.get_enterprise_name()
+        fully_managed_policy_option_list = android_management_api.fully_managed_policy_option_list
         context = {
-            'enterprise_name': enterprise_name
+            'enterprise_name': enterprise_name,
+            'fully_managed_policy_option_list': fully_managed_policy_option_list
         }
         return render(request, 'emma/policies.html', context)
     else:
