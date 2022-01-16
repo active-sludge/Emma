@@ -45,8 +45,8 @@
                                  <label class="list-group-item">
                                     <input class="form-check-input flex-shrink-0" type="checkbox" value="{{fully_managed_policy_option.policy_key}}" id="{{fully_managed_policy_option.policy_key}}" name="policy_options">
                                     <span>
-                                        Disable Adding User
-                                        <small class="d-block text-muted text-left">Whether adding new users and profiles is disabled.</small>
+                                        {{ fully_managed_policy_option.policy_title }}
+                                        <small class="d-block text-muted text-left"> {{ fully_managed_policy_option.policy_description }} </small>
                                     </span>
                                 </label>
                             </div>

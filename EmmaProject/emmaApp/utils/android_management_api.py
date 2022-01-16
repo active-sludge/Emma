@@ -23,27 +23,6 @@ signup_url = None
 enterprise = None
 enterprise_name = None
 
-fully_managed_policy_option_list = [
-    {
-        'policy_key': 'addUserDisabled',
-        'policy_title': 'Disable Adding User',
-        'policy_description': 'Whether adding new users and profiles is disabled.'
-    },    {
-        'policy_key': 'addUserDisabled',
-        'policy_title': 'Disable Adding User',
-        'policy_description': 'Whether adding new users and profiles is disabled.'
-    },    {
-        'policy_key': 'addUserDisabled',
-        'policy_title': 'Disable Adding User',
-        'policy_description': 'Whether adding new users and profiles is disabled.'
-    },    {
-        'policy_key': 'addUserDisabled',
-        'policy_title': 'Disable Adding User',
-        'policy_description': 'Whether adding new users and profiles is disabled.'
-    },
-
-]
-
 
 def authenticate_google_user():
     flow = InstalledAppFlow.from_client_config(CLIENT_CONFIG, SCOPES)

@@ -1,14 +1,10 @@
-import json
-
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
-from django.utils.safestring import SafeString
-
-from emmaApp.utils import android_management_api
+from emmaApp.utils import android_management_api, policy_manager
 
 
 def home(request):
@@ -83,9 +79,10 @@ def policies(request):
     if android_management_api.androidmanagement is None:
         android_management_api.authenticate_google_user()
 
+    fully_managed_policy_option_list = policy_manager.fully_managed_policy_option_list
+    enterprise_name = android_management_api.get_enterprise_name()
+
     if request.method == 'GET':
-        enterprise_name = android_management_api.get_enterprise_name()
-        fully_managed_policy_option_list = android_management_api.fully_managed_policy_option_list
         context = {
             'enterprise_name': enterprise_name,
             'fully_managed_policy_option_list': fully_managed_policy_option_list
@@ -107,15 +104,13 @@ def policies(request):
             policy_dict['debuggingFeaturesAllowed'] = True
 
             for policy_option in policy_options:
-                print(policy_option)
                 policy_dict[policy_option] = True
 
-            print(policy_name)
-            print(policy_dict)
-
             policy_full_name = android_management_api.create_policy(policy_name, policy_dict)
-            # policy_full_name = android_management_api.create_default_policy()
+
             context = {
+                'enterprise_name': enterprise_name,
+                'fully_managed_policy_option_list': fully_managed_policy_option_list,
                 'policy_name': policy_full_name,
                 'policy_options': policy_options
             }
@@ -123,10 +118,12 @@ def policies(request):
         elif 'enroll_device' in request.POST:
             enterprise_name = android_management_api.get_enterprise_name()
             policy_full_name = request.POST.get('policy_name')
-            print(enterprise_name)
-            print(policy_full_name)
+            
             qrcode_url = android_management_api.enroll_device(enterprise_name, policy_full_name)
             context = {
+                'enterprise_name': enterprise_name,
+                'fully_managed_policy_option_list': fully_managed_policy_option_list,
+                'policy_name': policy_full_name,
                 'qrcode_url': qrcode_url,
             }
             return render(request, 'emma/policies.html', context)
