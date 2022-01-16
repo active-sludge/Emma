@@ -80,37 +80,40 @@ def policies(request):
         android_management_api.authenticate_google_user()
 
     fully_managed_policy_option_list = policy_manager.fully_managed_policy_option_list
+    byod_policy_option_list = policy_manager.byod_policy_option_list
+    # byod_application_available_install_package_name_list = policy_manager.byod_application_available_install_package_name_list
+    # byod_application_block_install_package_name_list = policy_manager.byod_application_block_install_package_name_list
+
     enterprise_name = android_management_api.get_enterprise_name()
 
     if request.method == 'GET':
         context = {
             'enterprise_name': enterprise_name,
-            'fully_managed_policy_option_list': fully_managed_policy_option_list
+            'fully_managed_policy_option_list': fully_managed_policy_option_list,
+            'byod_policy_option_list': byod_policy_option_list,
         }
         return render(request, 'emma/policies.html', context)
     else:
         if 'create_policy' in request.POST:
             policy_dict = {}
             policy_options = request.POST.getlist('policy_options')
+            byod_policy_options = request.POST.getlist('byod_policy_options')
             policy_name = request.POST.get('policy_name')
-
-            # policy_dict['applications'] = [
-            #     {
-            #         "packageName": "com.google.samples.apps.iosched",
-            #         "installType": "FORCE_INSTALLED"
-            #     }
-            # ]
-
-            policy_dict['debuggingFeaturesAllowed'] = True
 
             for policy_option in policy_options:
                 policy_dict[policy_option] = True
+
+            for byod_policy_option in byod_policy_options:
+                byod_policy = byod_policy_option_list[int(byod_policy_option)]
+                policy_options.append(byod_policy['policy_key'])
+                policy_dict[byod_policy['policy_key']] = byod_policy['policy_json']
 
             policy_full_name = android_management_api.create_policy(policy_name, policy_dict)
 
             context = {
                 'enterprise_name': enterprise_name,
                 'fully_managed_policy_option_list': fully_managed_policy_option_list,
+                'byod_policy_option_list': byod_policy_option_list,
                 'policy_name': policy_full_name,
                 'policy_options': policy_options
             }
@@ -123,6 +126,7 @@ def policies(request):
             context = {
                 'enterprise_name': enterprise_name,
                 'fully_managed_policy_option_list': fully_managed_policy_option_list,
+                'byod_policy_option_list': byod_policy_option_list,
                 'policy_name': policy_full_name,
                 'qrcode_url': qrcode_url,
             }
@@ -136,19 +140,16 @@ def devices(request):
     if request.method == 'POST':
         if 'delete_device' in request.POST:
             device_name = request.POST.get('device_name')
-            print(device_name)
             android_management_api.delete_device(device_name)
             return redirect('devices')
         elif 'lock_device' in request.POST:
             device_name = request.POST.get('device_name')
-            print(device_name)
             android_management_api.lock_device(device_name)
             return redirect('devices')
         else:
             pass
     else:
         devices = android_management_api.get_devices()
-        print(devices)
 
         context = {
             'devices': devices

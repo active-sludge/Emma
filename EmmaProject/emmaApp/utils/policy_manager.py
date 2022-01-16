@@ -72,3 +72,36 @@ fully_managed_policy_option_list = [
                               'because bluetoothConfigDisabled can be bypassed by the user. '
     },
 ]
+
+
+byod_policy_option_list = [
+    {
+        'policy_key': 'passwordRequirements',
+        'policy_title': 'Add Password to Workprofile',
+        'policy_description': 'Add 6 digit alphabetic password to the work profile.',
+        'policy_json': {
+                "passwordMinimumLength": 6,
+                "passwordQuality": "ALPHABETIC"
+        }
+    },    {
+        'policy_key': 'parentProfilePasswordRequirements',
+        'policy_title': 'Add Passcode to Whole Device',
+        'policy_description': 'Add 4 digit numeric screen pass to the whole device.',
+        'policy_json': {
+                "passwordMinimumLength": 4,
+                "passwordQuality": "NUMERIC_COMPLEX"
+        }
+    }
+]
+
+byod_application_available_install_package_name_list = [
+    'com.microsoft.office.word',
+    'com.microsoft.office.excel',
+    'com.microsoft.office.powerpoint',
+]
+
+byod_application_block_install_package_name_list = [
+    'com.zhiliaoapp.musically',
+    'com.facebook.katana',
+    'com.reddit.frontpage',
+]
