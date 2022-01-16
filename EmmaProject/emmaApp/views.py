@@ -146,6 +146,10 @@ def devices(request):
             device_name = request.POST.get('device_name')
             android_management_api.lock_device(device_name)
             return redirect('devices')
+        elif 'restart_device' in request.POST:
+            device_name = request.POST.get('device_name')
+            android_management_api.restart_device(device_name)
+            return redirect('devices')
         else:
             pass
     else:

@@ -169,3 +169,13 @@ def lock_device(device_id):
             "type": "LOCK"
         }
     ).execute()
+
+
+def restart_device(device_name):
+    print(device_name)
+    androidmanagement.enterprises().devices().issueCommand(
+        name=device_name,
+        body={
+            "type": "REBOOT"
+        }
+    ).execute()
